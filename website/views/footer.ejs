@@ -1,0 +1,307 @@
+
+    <style type="text/css">
+      .placeholder
+        {
+          color: #aaa;
+        }
+    </style>
+    <form id="frmsignup" method="post" action="" >
+    <!-- signup modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+          <button type="button" class="close modal-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <div class="modal-body entryModal">
+            <div class="text-center m-b-sm">
+              <h4 class="m-b">Join the community now!</h4>
+              <button class="btn googleLogin" onclick="window.location='<%=baseURL%>auth/google'"><img src="<%=baseURL%>assets/images/google.png"/> Login with Google</button>
+              <div class="m-t-sm">
+                Existing member? <a href="<%=baseURL%>auth/login">Login</a>
+              </div>
+            </div>
+            <div class="text-center login-box">
+              <h5 class="m-b-lg">Or Create your profile..</h5>
+              <div class="align-center" style="max-width: 360px;">
+                <div class="form-group display-flex v-center">
+                  <div style="max-width: 49%;"><input type="text" name="firstname" class="form-control" placeholder="First Name"/></div>
+                  <div style="max-width: 49%;" class="m-l-xs"><input type="text" name="lastname" class="form-control" placeholder="Last Name"/></div>
+                </div>
+                <div class="form-group">
+                  <input type="text" name="email" class="form-control" placeholder="Email" required/>
+                </div>
+                <div class="form-group">
+                  <input type="text" name="username" class="form-control" placeholder="Username" required/>
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password" class="form-control" placeholder="Password" required/>
+                </div>
+                <div class="form-group">
+                  <input type="password" name="confirmation_password" class="form-control" placeholder="Confirm Password" required/>
+                </div>
+                <div class="form-group">
+                <div class="form-group display-flex v-center">
+                  <label style="margin-right:30px;">State:</label>
+                  <select class="form-control" name="state" style="max-width: 49%">
+                    <% states.forEach(state => { %>
+                      <option value="<%=state%>"><%=state%></option>
+                    <% }); %>
+                  </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                <div class="form-group display-flex v-center">
+                  <label style="margin-right:20px;">Market: </label>
+                  <select class="form-control" name="market" style="max-width: 49%">
+                    <% markets.forEach(market => { %>
+                      <option value="<%=market%>"><%=market%></option>
+                    <% }); %>
+                  </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                <div class="form-group display-flex v-center">
+                  <label style="margin-right:20px;">Variety: </label>
+                  <select class="form-control" name="variety" style="max-width: 49%">
+                    <% varieties.forEach(variety => { %>
+                      <option value="<%=variety%>"><%=variety%></option>
+                    <% }); %>
+                  </select>
+                </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-group display-flex v-center">
+                    <label style="margin-right:29px;">Grade: </label>
+                    <select class="form-control" name="grade" style="max-width: 49%">
+                      <% grades.forEach(grade => { %>
+                        <option value="<%=grade%>"><%=grade%></option>
+                      <% }); %>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group text-gray">
+                  <label class="m-b-none">
+                    <input name="terms" type="checkbox" required/>
+                    I've read and understood the <a href="#">Terms and Conditions</a>
+                  </label>
+                </div>
+                <div class="">
+                    <small id="errmsg"></small>
+                  <button type='submit' class="btn btn-outline-dark btn-width-120">Continue to Sign up</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+ 
+
+    <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="display-flex v-center post-details">
+              <div class="user-icon"><img src="<%=baseURL%>assets/images/boy.png"/></div>
+              <div class="m-l-sm">
+                <div class="user-name">
+                  <%
+
+                    var heading = "";
+                    if(user){
+
+                      if(user.firstname)
+                        heading = user.firstname ;
+                      else
+                        heading = user.username ;
+                    }
+
+                  %>
+                  <%= heading %></div>
+
+              </div>
+              <div class="align-right text-gray hide-sm" id="draft"></div>
+            </div>
+            <form method="post" action="" id="frmProducts">
+            
+              <div class="mainQuestion firstView">
+                
+                <input type="hidden" name="user_name" value="<%= user?user._id : 0 %>">
+                <div class="errmsg"></div>
+            
+              </div>
+
+                <div class="form-group">
+                <div class="form-group display-flex v-center">
+                  <label style="margin-right:30px;">State:</label>
+                  <select class="form-control" name="state" style="max-width: 49%">
+                    <% states.forEach(state => { %>
+                      <option value="<%=state%>"><%=state%></option>
+                    <% }); %>
+                  </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                <div class="form-group display-flex v-center">
+                  <label style="margin-right:20px;">Market: </label>
+                  <select class="form-control" name="market" style="max-width: 49%">
+                    <% markets.forEach(market => { %>
+                      <option value="<%=market%>"><%=market%></option>
+                    <% }); %>
+                  </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                <div class="form-group display-flex v-center">
+                  <label style="margin-right:20px;">Variety: </label>
+                  <select class="form-control" name="variety" style="max-width: 49%">
+                    <% varieties.forEach(variety => { %>
+                      <option value="<%=variety%>"><%=variety%></option>
+                    <% }); %>
+                  </select>
+                </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-group display-flex v-center">
+                    <label style="margin-right:29px;">Grade: </label>
+                    <select class="form-control" name="grade" style="max-width: 49%">
+                      <% grades.forEach(grade => { %>
+                        <option value="<%=grade%>"><%=grade%></option>
+                      <% }); %>
+                    </select>
+                  </div>
+                </div>
+
+              <div class="m-t display-flex v-center">
+                <div class="text-gray firstView"></div>
+                  <div class="align-right">
+                    <button data-dismiss="modal" aria-label="Close" class="btn btn-outline-dark btn-width-120 firstView">Discard</button>
+                  
+                    <button type="submit" class="btn btn-primary btn-width-120 firstView">Submit</button>
+                
+                  </div>
+                </div>
+              </div>
+
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="<%=baseURL%>javascripts/custom.js"></script>
+
+
+    <script type="text/javascript">
+
+
+       $(function() {
+
+             $( "form#frmProducts" ).on( "submit", function( event ) {
+
+                console.log("adding more products")
+                event.preventDefault();
+                $.ajax({
+                    url: '/post-product',
+                    type: 'POST',
+                    dataType: 'json',
+                    data:  $( this ).serialize(),
+                    beforeSend: function(){
+                      // Show image container
+                      $("#loaderbtn").show();
+                     },
+                     complete:function(data){
+                        // Hide image container
+                        $("#loaderbtn").hide();
+                       }
+                }).always(function (data) {
+                    console.log(data);
+
+                    if (data.status!=200 && data.responseJSON != null ) {
+                      var str;
+                        for (var i = 0; i < data.responseJSON.message.length; i++) {
+                            if (data.responseJSON.message[i].msg)
+                              str += '<font color="red">'+data.responseJSON.message[i].msg+"</font><br>";
+                        }
+                       $("#errmsg").html(str);
+                        return false;
+                    }
+                    else{
+                    console.log('here too');
+                    window.location="home";
+                  
+                  }
+                });
+
+                return false;
+            });
+
+
+            $( "form#frmsignup" ).on( "submit", function( event ) {
+                console.log("lets submit a form")
+                event.preventDefault();
+                $.ajax({
+                    url: '/signup',
+                    type: 'POST',
+                    dataType: 'json',
+                    data:  $( this ).serialize()
+                }).always(function (data) {
+                    console.log(data);
+
+                    if (data.responseJSON != null && data.responseJSON.message.length) {
+                      var str;
+                        for (var i = 0; i < data.responseJSON.message.length; i++) {
+                            if (data.responseJSON.message[i].msg)
+                              str += '<font color="red">'+data.responseJSON.message[i].msg+"</font><br>";
+                        }
+                       $("#errmsg").html(str);
+                        return false;
+                    }
+                    else{
+                    console.log("some error")
+                    if(data.email){
+                          sessionStorage.setItem('userid', data._id);
+                          sessionStorage.setItem('username', data.username);
+                          sessionStorage.setItem('email', data.email);
+                          sessionStorage.setItem('firstname', data.firstname);
+                          sessionStorage.setItem('lastname', data.lastname);
+                          $('#signupModal').modal('hide');
+                          window.location='<%=baseURL%>home';
+                          // return res.send("home.ejs");
+                    }
+                    else{
+                        $("#errmsg").html(data);
+                    }
+                  }
+                });
+
+                return false;
+            });
+        })
+
+        function showLabel(event, ui) {
+              window.location = '/search?text='+ui.item.label;
+          }
+
+        function encodeHtmlEntity(str) {
+          
+          return str.replace(/[\u00A0-\u9999\<\>\&\'\"\\\/]/gim, function(c){
+            return '&#' + c.charCodeAt(0) + ';' ;
+          });
+
+        }
+
+
+    </script>
+
+
+  </body>
+</html>

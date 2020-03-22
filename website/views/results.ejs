@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href="favicon.ico" />
+    <title>Deloitte</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/custom.css" />
+
+  </head>
+  <body>
+
+    <% include header %>
+
+    <section class="banner2">
+      <div class="bannerCaption">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+                <div class="bannerTitle">Suitable Markets along with quanity</div>
+            </div>
+            <div class="col-md-7">
+              <h4>First Name: <%= user.firstname %></h4>
+              <h4>Last Name: <%= user.lastname %></h4>
+              <h4>Username: <%= user.username %></h4>
+              
+                <div class="white-bg post-block box-shadow">
+                  <%
+                  var i=0; 
+                  products.forEach(product => { i++;%>
+                      <div class="display-flex v-center post-details">
+                        <div style="font-size: 1.4em; margin-right: 20px">PRODUCT ID: <%=i %></div>
+                        <div style="font-size: 1.4em; margin-right: 20px"><%=product.state%></div>
+                        <div style="font-size: 1.4em; margin-right: 20px"><%=product.market%></div>
+                        <div style="font-size: 1.4em; margin-right: 20px"><%=product.variety%></div>
+                        <div style="font-size: 1.4em; margin-right: 20px"><%=product.grade%></div>
+                      </div>
+                      <div class="display-flex v-center post-details">
+                        <%
+                          var j=0; 
+                          optimum_markets[i-1].forEach(optimum_market => { j++;%>
+                          
+                          <div style="font-size: 1.5em; margin-right: 15px"><%=optimum_market%></div>
+
+                        <% }); %>                   
+<!--                    <label style="font-size: 1.5em margin-left: 15px; margin-top: 15px;">Quantity:</label>
+                        <label style="margin-left: 15px; margin-top: 15px;"><%=optimum_markets.quantity%></label>-->
+                      </div>
+                      <% }); %>
+                </div>
+            </div>
+            <div class="col-md-5">
+              <div class="bannerImg2"><img class="img-fluid" src="assets/images/illustration.png"/></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mouseScroll goto" data-goto="practice"></div>
+    </section>
+
+
+    <% include footer %>
+

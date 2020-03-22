@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href="favicon.ico" />
+    <title>Deloitte</title>    
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+      <link rel="stylesheet" href="<%=baseURL%>styles/custom.css" />
+
+  </head>
+  <body>
+    
+    <% include header %>
+    <%
+      var answerurl="auth/login";
+      var heading = "";
+      if(user.firstname)
+        heading = "Hi "+user.firstname+"!" ;
+      else
+        heading = "Hi "+user.username+"!" ;
+    %>
+    <section class="section">
+        <div class="container container-sm">
+          <h4 class="welcome-title"> <%= heading %> Enter your produce and it's quantity !</h4>
+          <div class="white-bg post-block box-shadow" style="padding-bottom: 50px">
+            <div class="display-flex v-center post-details">
+              <div class="user-icon"><img src="<%=baseURL%>assets/images/girl.png"/></div>
+            </div>
+            <div>
+              <h4>First Name: <%= user.firstname %></h4>
+              <h4>Last Name: <%= user.lastname %></h4>
+              <h4>Username: <%= user.username %></h4>
+              
+              <form method="post" action="/market" >
+
+                <div class="white-bg post-block box-shadow">
+                  <%
+                  var i=0; 
+                  user.products.forEach(product => { i++;%>
+                      <div class="display-flex v-center post-details">
+                      
+                        <div style="margin-right: 15px">PRODUCT ID: <%=i %></div>
+                        <div style="margin-right: 15px"><%=product.state%></div>
+                        <div style="margin-right: 15px"><%=product.market%></div>
+                        <div style="margin-right: 15px"><%=product.variety%></div>
+                        <div style="margin-right: 15px"><%=product.grade%></div>
+                        <div class="form-group text-gray" style="margin-left: 10px; padding-top: 15px;">
+                          <input name="<%="select"+i%>" type="checkbox"/>
+                        </div>
+
+                        <div class="form-group text-gray" >
+                          <label style="margin-left: 15px; margin-top: 15px;">Quantity</label>
+                          <input name="<%="quantity"+i%>" style="margin-left: 15px;" type="number"/>
+                        </div>
+                      
+                      </div>
+                      
+                      <% }); %>
+                </div>
+                <button type="submit" class="btn btn-primary btn-width-120 pull-right" >Submit</button>
+              </form>
+            </div>
+          </div>          
+        </div>
+    </section>
+   
+
+    
+     <% include footer %>
