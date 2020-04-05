@@ -32,6 +32,9 @@ mongoose.connection.on('error',(error)=>{
     console.log("error =",error);
 });
 
+mongoose.connection.on('connected', () => {
+  console.log('connected to mongodb');
+});
 
 const addTemplate=require('./routes/loginmiddlewares').addTemplate;
 

@@ -9,6 +9,7 @@ def normalize(df):
 		else:
 			max_value = df[feature_name].max()
 			min_value = df[feature_name].min()
+			result[feature_name+'_old']=df[feature_name]
 			result[feature_name] = (df[feature_name] - min_value) / (max_value - min_value)
 	return result
 

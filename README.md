@@ -22,12 +22,9 @@ Please cite this paper and the original source of the appropriate dataset when u
 # Training and Evaluation
 Various multivariate benchmark datasets can be evaluated with the provided code and weight files. Refer to the weights directory for clarification.
 
-There is 1 script file for each dataset, and 2 major sections in the code. For each of these code files, please keep the line below uncommented.
 
 - To use the MLSTM FCN model : `model = generate_model()`
-- To use the MALSTM FCN model : `model = generate_model_2()`
-- To use the LSTM FCN model : `model = generate_model_3()`
-- To use the ALSTM FCN model : `model = generate_model_4()`
+
 
 ## Training
 To train the a model, uncomment the line below and execute the script. **Note** that '???????' will already be provided, so there is no need to replace it. It refers to the prefix of the saved weight file. Also, if weights are already provided, this operation will overwrite those weights.
@@ -39,10 +36,6 @@ To evaluate the performance of the model, simply execute the script with the bel
 
 `evaluate_model(model, DATASET_INDEX, dataset_prefix='???????', batch_size=128)`
 
-# Results
-<img src="https://github.com/titu1994/MLSTM-FCN/blob/master/images/MLSTM-FCN-scores1.jpg?raw=true" height=100% width=100%>
-<img src="https://github.com/titu1994/MLSTM-FCN/blob/master/images/MLSTM-FCN-scores2.jpg?raw=true" height=100% width=100%>
-<img src="https://github.com/titu1994/MLSTM-FCN/blob/master/images/MLSTM-FCN-scores3.jpg?raw=true" height=100% width=100%>
 
 # Citation
 ```

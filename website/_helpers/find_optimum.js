@@ -1,30 +1,18 @@
 module.exports = find_optimum;
 
-const spawn = require("child_process").spawn;
+var zmq = require('zeromq')
 
 function find_optimum(product){
 
-	const pythonProcess = spawn('python',["/home/sauravskv/Desktop/Deloitte/MLSTM-FCN/find_best.py", product.state, product.market, product.variety, product.grade]);
-
-	var result = ''
-
+	var socket = zmq.socket('req');
+	socket.connect("tcp://127.0.0.1:5555");
+	
+	socket.send(JSON.stringify(product));
 
 	return new Promise((resolve,reject) => {
-		pythonProcess.stdout.on('data', (data) => {
-    		// Do something with the data returned from python script
-    		result=result+data.toString()
-		});	
-
-
-		pythonProcess.on('close',()=>{
-			console.log('resolved',result)
-			resolve(result);
+		socket.on('message',(data)=>{
+			console.log(JSON.parse(data.toString()))
+			resolve(data.toString());
 		})
-	
-		// pythonProcess.stderr.on('data',(error) => {
-		// 	//reject the promise
-		// 	reject(error.toString());
-		// })
 	})
 }
-

@@ -41,16 +41,19 @@
                         <div style="font-size: 1.4em; margin-right: 20px"><%=product.variety%></div>
                         <div style="font-size: 1.4em; margin-right: 20px"><%=product.grade%></div>
                       </div>
-                      <div class="display-flex v-center post-details">
+                      <div class="white-bg post-block box-shadow">
                         <%
                           var j=0; 
                           optimum_markets[i-1].forEach(optimum_market => { j++;%>
-                          
-                          <div style="font-size: 1.5em; margin-right: 15px"><%=optimum_market%></div>
-
-                        <% }); %>                   
-<!--                    <label style="font-size: 1.5em margin-left: 15px; margin-top: 15px;">Quantity:</label>
-                        <label style="margin-left: 15px; margin-top: 15px;"><%=optimum_markets.quantity%></label>-->
+                          <div class="display-flex v-center post-details">
+                            <label style="font-size: 2em margin-left: 15px;">State:</label>
+                            <label style="font-size: 1.5em; margin-right: 15px;margin-left: 15px;"><%=optimum_market.state%></label>
+                            <label style="font-size: 2em margin-left: 15px; ">Market:</label>
+                            <label style="font-size: 1.5em; margin-right: 15px; margin-left: 15px;"><%=optimum_market.market%></label>
+                            <label style="font-size: 2em margin-left: 15px;">Quantity:</label>
+                            <label style="font-size: 1.5em; margin-right: 15px; margin-left: 15px;"><%=optimum_market.prediction%></label>
+                          </div>
+                        <% }); %>
                       </div>
                       <% }); %>
                 </div>

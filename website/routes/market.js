@@ -35,6 +35,7 @@ router.post('/market',(req,res)=>{
 				//console.log(req.body["select"+i])
 			if(req.body["select"+i]=='on')
 			{
+					product['quantity']=req.body["quantity"+i];
 					
 					array_promises.push(Optimum(product));
 
@@ -51,7 +52,14 @@ router.post('/market',(req,res)=>{
 			console.log(data);
 
 			data.forEach(optimum_market=>{
-				optimum_markets.push(optimum_market.split('\n'));
+				markets=[]
+				
+				Object.values(JSON.parse(optimum_market)).forEach((market)=>{
+					markets.push(JSON.parse(market))
+					})
+
+				optimum_markets.push(markets);
+				
 				})
 
 				console.log('optimum_markets = ',optimum_markets);
@@ -83,7 +91,6 @@ router.post('/post-product',(req,res)=>{
         	req.session.user = results;
         	res.locals.user = results;
 			return res.status(200).json(results)
-			//return res.render('home', {user: req.session.user,states:States, grades:Grades, varieties:Varieties, markets:Markets})
 		}	
 			
 		else
